@@ -1,0 +1,49 @@
+---
+interface Props{
+    imdb_id: String
+    title: String
+}
+
+const {imdb_id} = Astro.props
+const {title} = Astro.props
+
+---
+
+<div class="box">
+<p>La url de la consulta que vamos a realizar:</p>
+    <label> Peticion <strong>GET</strong> a "esretrieveSeriesIdByTittle"</label>
+<label class="consulta"> https://moviesminidatabase.p.rapidapi.com/series/idbyTitle/Dragon%20Ball/</label>
+<ul>
+ <li>{title} - {imdb_id}</li>
+
+</ul>
+
+
+</div>
+
+
+
+<style>
+
+.box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    background-color: #72788e;
+    border-radius: 50px;
+}
+.box *{
+    margin: 20px;
+    padding: 10px;
+    font-size: xx-large;
+}
+.consulta{
+    font-style: italic;
+}
+
+
+
+
+
+</style>

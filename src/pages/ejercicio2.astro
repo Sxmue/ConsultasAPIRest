@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/layout.astro";
+
+
+const url = 'https://moviesminidatabase.p.rapidapi.com/series/id/tt0280249/';
+const options = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Key': 'da681a213fmsh08fe42e12c75a5ep139024jsn3c603a1c96c2',
+    'X-RapidAPI-Host': 'moviesminidatabase.p.rapidapi.com'
+  }
+};
+  const respuesta = await fetch(url, options)
+  const data = await respuesta.json()
+
+  console.log(data)
+
+  const resultsArray = Array.isArray(data.results) ? data.results : [];
+
+
+
+---
+
+
+<Layout title="Ejercicio2">
+
+    <div>
+        <p>Consulta: <em>La url del poster de la primera serie que aparece registrada (del 1995)</em> </p>
+      </div>
+      
+      <div class="container">
+        {
+        <img src={data.results.image_url} alt="">
+        }
+      
+      
+      </div>
+
+      
+      <p class="mensajito"> La URL ES: <br>{data.results.image_url} </p>
+
+
+
+
+
+</Layout>
+
+<style>
+ div {
+    text-align: center;
+    align-content: center;
+}
+img{
+    width: 500px;
+    height: 500px;
+    margin: 5px;
+  }
+
+p {
+  color: white;
+  font-size: xx-large
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #72788e;
+    border-radius: 50px;
+    width: fit-content;
+    padding: 50px;
+    margin: auto; 
+    margin-top: 50px; /* Ajusta el margen superior según sea necesario */
+  }
+.container *{
+  font-size: x-large;
+  
+
+}
+p.mensajito{
+    font-size: x-large;
+   text-align: center;
+    font-weight: 700;
+    color: goldenrod;
+    -webkit-text-stroke: 0.5px black;
+
+}
+</style>

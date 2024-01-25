@@ -1,0 +1,60 @@
+---
+import CardLandingPage from "../components/CardLandPage.astro";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>PeliculasFranciscoLanding</title>
+  </head>
+  <body>
+    <div>
+      <h1>API Peliculas Francisco 🎬</h1>
+      <p class="subtitle">Tarea de las consultas a la API de IMDb</p>
+    </div>
+
+    <div class="cards">
+      <a href="ejercicio1"><CardLandingPage ejercicio={"ejercicio1"} /></a>
+      <a href="ejercicio2"><CardLandingPage ejercicio={"ejercicio2"} /></a>
+      <a href="ejercicio3"><CardLandingPage ejercicio={"ejercicio3"} /></a>
+      <a href="ejercicio4"><CardLandingPage ejercicio={"ejercicio4"} /></a>
+      <a href="ejercicio5"><CardLandingPage ejercicio={"ejercicio5"} /></a>
+      <a href="ejercicio6"><CardLandingPage ejercicio={"ejercicio6"} /></a>
+    </div>
+  </body>
+</html>
+
+<style>
+    a {
+    text-decoration: none;
+  }
+  body {
+    background-color: #17181c;
+    font-family: "NuevaFuente", sans-serif;
+  }
+  h1 {
+    color: white;
+    text-align: center;
+    font-size: 100px;
+    margin-bottom: 0px;
+  }
+  .subtitle {
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 100px;
+    margin-top: 0px;
+    font-style: italic;
+  }
+
+  .cards {
+    justify-content: center;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+</style>

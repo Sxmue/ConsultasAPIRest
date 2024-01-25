@@ -1,0 +1,47 @@
+---
+interface Props{
+    ejercicio: String
+}
+
+const {ejercicio} = Astro.props
+---
+<div id="card">
+    <p style="">Consulta a la API<br>
+        en el {ejercicio}
+    </p>
+</div>
+
+
+<style>
+#card {
+    margin: 20px;
+    width:fit-content;
+    display:flex;
+    height: fit-content;
+    border-radius: 30px;
+    background-color: #363842;
+    height:fit-content;
+    text-align: center;
+    justify-content: center;
+    
+}
+#card:hover{
+    background-color: #72788e;
+    transition-duration: 0.5s
+}
+#card:active{
+    background-color: #21252b;
+    transition-duration: 0s;
+}
+p{
+    padding: 5px;
+    margin: 50px;
+    color: white;
+    display: flex;
+    font-size: xx-large;
+
+}
+
+
+
+</style>

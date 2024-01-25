@@ -1,0 +1,83 @@
+---
+import Layout from "../layouts/layout.astro";
+import Response from "../components/ResponseCard.astro";
+
+const url = 'https://moviesminidatabase.p.rapidapi.com/series/idbyTitle/Dragon%20Ball/';
+const options = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Key': 'da681a213fmsh08fe42e12c75a5ep139024jsn3c603a1c96c2',
+    'X-RapidAPI-Host': 'moviesminidatabase.p.rapidapi.com'
+  }
+};
+const miArray = [];
+  const respuesta = await fetch(url, options)
+  const data = await respuesta.json()
+
+  const resultsArray = Array.isArray(data.results) ? data.results : [];
+
+---
+
+<Layout title="Ejercicio1">
+
+<div>
+  <p>Consulta: <em>Cuantas series de "Dragon Ball" hay registradas</em> </p>
+</div>
+
+<div class="container">
+
+    <ol>
+      {
+        resultsArray.map((data) =>(
+          <li>{data.imdb_id} - <label>{data.title}</label></li>
+        ))
+      }
+    </ol>
+
+</div>
+
+
+
+</Layout>
+
+<style>
+  div {
+    text-align: center;
+    align-content: center;
+  }
+
+p {
+  color: white;
+  font-size: xx-large
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #72788e;
+    border-radius: 50px;
+    width: fit-content;
+    padding: 50px;
+    margin: auto; 
+    margin-top: 50px; /* Ajusta el margen superior según sea necesario */
+  }
+.container *{
+  font-size: x-large;
+  
+
+}
+li{
+  font-weight: 700;
+
+}
+label{
+  color: aquamarine;
+  -webkit-text-stroke: 0.2px black;
+}
+
+
+
+
+</style>

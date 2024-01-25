@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/layout.astro";
+
+const url =
+  "https://moviesminidatabase.p.rapidapi.com/movie/imdb_id/byTitle/DragonBall/";
+const options = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "da681a213fmsh08fe42e12c75a5ep139024jsn3c603a1c96c2",
+    "X-RapidAPI-Host": "moviesminidatabase.p.rapidapi.com",
+  },
+};
+const respuestaID = await fetch(url, options);
+const dataId = await respuestaID.json();
+
+const url2 =
+  "https://moviesminidatabase.p.rapidapi.com/movie/id/tt1098327/cast/";
+const respuestaCast = await fetch(url2, options);
+const dataCast = await respuestaCast.json();
+const resultados = dataCast.results;
+
+const url3 = "https://moviesminidatabase.p.rapidapi.com/actor/id/nm0154226/";
+const respuestaActor = await fetch(url3, options);
+const dataActor = await respuestaActor.json();
+const resultadosActor = dataActor.results;
+console.log(resultadosActor);
+---
+
+<Layout title="Ejercicio4">
+  <div class="container">
+    <ol>
+      <li>
+        Sacamos el id de la pelicula Dragon ball evolution, sacando todos los id
+        de las peliculas de Dragon Ball con <br />
+        <strong style="color:black">retrievegetMovieIdByTitle</strong>
+        <br />
+        el id es: <strong>{dataId.results[0].imdb_id}</strong>
+      </li>
+      <li>
+        -Ahora que tenemos el id de la pelicula, cogemos el cast de la pelicula
+        haciendole la consulta a <strong style="color:black"
+          >listgetCastByMovieIds</strong
+        >
+        <br />
+        <ul>
+          {
+            resultados.roles.map((data) => (
+              <li>
+                <strong>{data.role} </strong>/{" "}
+                <strong>{data.actor.name}</strong> con ID -{" "}
+                <strong>{data.actor.imdb_id}</strong>
+              </li>
+            ))
+          }
+        </ul>
+      </li>
+      <li>
+        Ahora que sabemos el id del actor cogemos sus datos con <strong
+          style="color:black">retrievegetActorDetailsById</strong
+        >
+      </li>
+    </ol>
+  </div>
+  <div class="container">
+    <p>
+      Su lugar de nacimiento fue: <strong
+        >"{resultadosActor.birth_place}"</strong
+      >
+    </p>
+    <p>
+      Su signo del zodiaco es <strong>"{resultadosActor.star_sign}"</strong>
+    </p>
+  </div>
+</Layout>
+
+<style>
+  div {
+    text-align: center;
+    align-content: center;
+  }
+
+  p {
+    color: white;
+    font-size: xx-large;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #72788e;
+    border-radius: 50px;
+    width: fit-content;
+    padding: 50px;
+    margin: auto;
+    margin-top: 50px; /* Ajusta el margen superior según sea necesario */
+  }
+  .container * {
+    font-size: x-large;
+  }
+</style>

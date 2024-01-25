@@ -1,0 +1,97 @@
+---
+import Layout from "../layouts/layout.astro";
+const url = 'https://moviesminidatabase.p.rapidapi.com/series/id/tt0214341/num_seasons/';
+const options = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Key': 'da681a213fmsh08fe42e12c75a5ep139024jsn3c603a1c96c2',
+    'X-RapidAPI-Host': 'moviesminidatabase.p.rapidapi.com'
+  }
+};
+  const respuestaSeasons = await fetch(url, options)
+  const dataSeasons = await respuestaSeasons.json()
+
+  console.log(dataSeasons)
+
+  const url2 = 'https://moviesminidatabase.p.rapidapi.com/series/id/tt0280249/num_episodes_in_season/3/';
+  const respuesta = await fetch(url2, options)
+  const dataEpisodes = await respuesta.json()
+
+  console.log(dataEpisodes)
+
+  const url3 = 'https://moviesminidatabase.p.rapidapi.com/series/id/tt0280249/season/3/episode/1/';
+  const respuesta3 = await fetch(url3, options)
+  const dataEpisode3 = await respuesta3.json()
+
+  console.log(dataEpisode3)
+
+
+
+---
+
+<Layout title="Ejercicio3">
+
+    <div>
+        <p>Consulta: <em>El título y argumento del primer episodio de la 3ª saga (temporada) de la serie: Saga del Ejército de la Patrulla Roja.</em> </p>
+      </div>
+
+
+      <div class="container">
+        <ol>
+            <li>-Primero hay que sacar el numero de temporadas ahora que sabemos la serie</li>
+            <>Para eso le haremos la consulta a <strong style="color:black">listGetSeriesSeasonsNumberByIds</strong><br>
+            "Tiene: {dataSeasons.results} temporadas"
+            <li>-Luego hay que sacar los episodios que tiene esa temporada haciendole la consulta a <strong style="color:black">listGetSeriesSeasonsNumberByIds</strong> <br>
+                "La temporada tiene {dataEpisodes.results} episodios"</li>
+            <li>Y por ultimo sacamos el titulo y la sinopsis de ese episodio con <strong style="color:black">retrievegetEpisodeBySeasonNumAndEpNum</strong> </li>
+        </ol>
+      </div>
+      <div class="container">
+        <p>{dataEpisode3.results.title}</p>
+        <p>{dataEpisode3.results.description}</p>
+
+
+      </div>
+
+
+</Layout>
+
+
+
+<style>
+ div {
+    text-align: center;
+    align-content: center;
+  }
+
+p {
+  color: white;
+  font-size: xx-large
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #72788e;
+    border-radius: 50px;
+    width: fit-content;
+    padding: 50px;
+    margin: auto; 
+    margin-top: 50px; /* Ajusta el margen superior según sea necesario */
+  }
+.container *{
+  font-size: x-large;
+  
+
+}
+.container p{
+    font-size: x-large;
+   text-align: center;
+    font-weight: 700;
+    color:black;
+}
+
+
+</style>

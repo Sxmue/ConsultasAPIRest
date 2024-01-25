@@ -1,0 +1,78 @@
+---
+import Layout from "../layouts/layout.astro";
+const url =
+  "https://moviesminidatabase.p.rapidapi.com/movie/imdb_id/byTitle/poltergeist/";
+const options = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "da681a213fmsh08fe42e12c75a5ep139024jsn3c603a1c96c2",
+    "X-RapidAPI-Host": "moviesminidatabase.p.rapidapi.com",
+  },
+};
+const respuestaID = await fetch(url, options);
+const dataId = await respuestaID.json();
+console.log(dataId)
+
+const url2 =
+  "https://moviesminidatabase.p.rapidapi.com/movie/id/tt0084516/awards/";
+const respuestaAwards = await fetch(url2, options);
+const dataAwards = await respuestaAwards.json();
+console.log(dataAwards)
+---
+
+<Layout title="Ejercicio5">
+  <div>
+    <p>
+      Consulta: <em
+        >De ese mismo año es la película Postergeist, el primer gran éxito de
+        Steven Spielberg como productor,que participó en los premios Oscars al
+        año siguientesin ser ganadora. ¿Aquéapartado fue nominada? ¿Que otro
+        premio ganó ese año?</em>
+    </p>
+  </div>
+  <div class="container">
+    <ol>
+        <li>Primero que nada, hay que sacar el id de la pelicula poltergeist llamando a <strong>retrievegetMovieIdByTitle</strong><br> el id es: <strong>{dataId.results[2].imdb_id}</strong></li>
+        <li>Ahora sacamos los premis a los que ha estado una peli nominada por id con <strong>listgetAwardsByMovieIds</strong></li>
+    </ol>
+
+    <div class="container">
+        <p>{dataAwards.results[0].movie.title}</p> 
+        <p>{dataAwards.results[0].award_name}</p> 
+       <p>{dataAwards.results[0].award}</p> 
+
+    </div>
+
+  </div>
+</Layout>
+
+<style>
+    li{
+
+        padding: 10px;
+    }
+  div {
+    text-align: center;
+    align-content: center;
+  }
+
+  p {
+    color: white;
+    font-size: xx-large;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #72788e;
+    border-radius: 50px;
+    width: fit-content;
+    padding: 50px;
+    margin: auto;
+    margin-top: 50px; /* Ajusta el margen superior según sea necesario */
+  }
+  .container * {
+    font-size: x-large;
+  }
+</style>
